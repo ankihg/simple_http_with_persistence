@@ -18,15 +18,16 @@ describe('server testing', () => {
     });
   });
 
-  // it('should post', (done) => {
-  //   request('localhost:3000')
-  //   .post('cunninghamia lanceolata')
-  //   .end((err, res) => {
-  //     if (err) throw err;
-  //     console.log('response from post');
-  //     console.log(res);
-  //     done();
-  //   });
-  // });
+  it('should post', (done) => {
+    request('localhost:3000')
+    .post('/trees')
+    .set({'name':'cunninghamia lanceolata'})
+    .end((err, res) => {
+      if (err) throw err;
+      console.log('response from post');
+      console.log(res);
+      done();
+    });
+  });
 
 });

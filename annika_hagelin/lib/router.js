@@ -11,7 +11,9 @@ Router.prototype.get = function(route, cb) {
   this.routes.GET[route] = cb;
 };
 
-
+Router.prototype.post = function(route, cb) {
+  this.routes.POST[route] = cb;
+};
 
 Router.prototype.route = function(req, res) {
   console.log(req.method);
