@@ -8,24 +8,32 @@ describe('server testing', () => {
 
   it('should get', (done) => {
     request('localhost:3000')
-    .get('/trees')
+    .get('/trees/0')
     .end((err, res) => {
-      if (err) throw err;
-      console.log('response from post');
+      expect(err).eql(null);
       expect(res).status(200);
-      console.log(res.text);
       done();
     });
   });
 
-  it('should post', (done) => {
+  it('should post cunninghamia lanceolata', (done) => {
     request('localhost:3000')
     .post('/trees')
     .set({'name':'cunninghamia lanceolata'})
     .end((err, res) => {
-      if (err) throw err;
-      console.log('response from post');
-      console.log(res);
+      expect(err).eql(null);
+      expect(res).status(200);
+      done();
+    });
+  });
+
+  it('should post cedrus deodara', (done) => {
+    request('localhost:3000')
+    .post('/trees')
+    .set({'name':'cedrus deodara'})
+    .end((err, res) => {
+      expect(err).eql(null);
+      expect(res).status(200);
       done();
     });
   });

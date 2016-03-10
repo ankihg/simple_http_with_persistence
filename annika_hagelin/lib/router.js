@@ -16,8 +16,13 @@ Router.prototype.post = function(route, cb) {
 };
 
 Router.prototype.route = function(req, res) {
-  console.log(req.method);
-  console.log(req.url);
-  console.log(this.routes[req.method]);
-  this.routes[req.method][req.url](req, res);
+  try {
+    var resource = req.url.split('/')[1];
+    this.routes[req.method]['/'+resource](req, res);
+  } catch (err) {
+    console.log('no route hit return 404');
+    res.writeHead(404, {'content-type': 'text/html'});
+    res.write('<h1>im lost</h1>');
+    res.end();
+  }
 };
