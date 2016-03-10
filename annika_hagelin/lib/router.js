@@ -8,10 +8,10 @@ var Router = module.exports = function() {
 };
 
 Router.prototype.get = function(route, cb) {
-  console.log('setting '+route);
   this.routes.GET[route] = cb;
-  console.log(this.routes['GET']);
 };
+
+
 
 Router.prototype.route = function(req, res) {
   console.log(req.method);
