@@ -11,13 +11,19 @@ treeRouter.get('/trees', (req, res) => {
 
 treeRouter.post('/trees', (req, res) => {
   console.log(req.headers.name);
-  var tree = {name: req.headers.name};
-  fs.writeFile(__dirname + '/../trees/plz.json', JSON.stringify(tree), (err) => {
-    if (err) throw err;
-  });
+
   fs.readdir(__dirname + '/../trees', (err, files) => {
-    if (err) throw err;
-    console.log(files);
+    if (err) {
+      res.writeHead(500, {'content-type': 'text/html'});
+      res.end();
+    }
+    var tree = {id: files.length, name: req.headers.name};
+
+    fs.writeFile(__dirname + '/../trees/tr'+files.length+'.json', JSON.stringify(tree), (err) => {
+      if (err) res.writeHead(500, {'content-type': 'text/html'});
+      else res.writeHead(200, {'content-type': 'text/html'});
+      res.end();
+    });
   });
 
 });
